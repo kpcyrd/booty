@@ -1,0 +1,18 @@
+---
+language: generic
+
+services:
+- docker
+
+before_install:
+- sudo ci/setup.sh
+- sudo rm -rf work/
+- docker build -t builder .
+
+script:
+# prevent travis from killing the job
+- ci/keepalive.sh &
+# -v /dev:/dev is needed as a workaround on travis
+- docker run --privileged --rm -v `pwd`:/booty -v /dev:/dev builder ./build.sh -v
+- ls -lah out/
+...
