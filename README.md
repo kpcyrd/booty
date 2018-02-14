@@ -7,6 +7,8 @@ toy live boot system.
 
 ## build
 
+    git submodule init
+    ./build.sh -p
     sudo ./build.sh -v
     ls -lah out/
 
