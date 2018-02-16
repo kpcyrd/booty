@@ -76,6 +76,7 @@ obfsproxy
 openconnect
 openssh
 openvpn
+os-prober
 partclone
 parted
 partimage
@@ -84,6 +85,7 @@ pptpclient
 pydf
 pyrit
 python2-gmpy2
+radare2
 reaver
 refind-efi
 ripgrep
@@ -98,6 +100,7 @@ sg3_utils
 signify
 smartmontools
 speedtouch
+strace
 sudo
 tcpdump
 testdisk
