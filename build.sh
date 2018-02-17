@@ -129,8 +129,16 @@ make_customize_airootfs() {
 
     lynx -dump -nolist 'https://wiki.archlinux.org/index.php/Installation_Guide?action=render' >> ${work_dir}/${arch}/airootfs/root/install.txt
 
+    mkdir "${work_dir}/${arch}/airootfs/root/.ssh"
+    chmod 0700 "${work_dir}/${arch}/airootfs/root/.ssh"
+    cp --no-preserve=owner "${script_path}/authorized_keys" "${work_dir}/${arch}/airootfs/root/.ssh/authorized_keys"
+    chmod 0600 "${work_dir}/${arch}/airootfs/root/.ssh/authorized_keys"
+
+    cp --no-preserve=owner "${script_path}/booty.conf" "${work_dir}/${arch}/airootfs/root/booty.conf"
+
     setarch ${arch} mkarchiso ${verbose} -w "${work_dir}/${arch}" -C "${work_dir}/pacman.conf" -D "${install_dir}" -r '/root/customize_airootfs.sh' run
     rm ${work_dir}/${arch}/airootfs/root/customize_airootfs.sh
+    rm ${work_dir}/${arch}/airootfs/root/booty.conf
 }
 
 # Prepare kernel/initramfs ${install_dir}/boot/
