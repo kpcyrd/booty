@@ -19,5 +19,17 @@ sed -i 's/#\(HandleSuspendKey=\)suspend/\1ignore/' /etc/systemd/logind.conf
 sed -i 's/#\(HandleHibernateKey=\)hibernate/\1ignore/' /etc/systemd/logind.conf
 sed -i 's/#\(HandleLidSwitch=\)suspend/\1ignore/' /etc/systemd/logind.conf
 
-systemctl enable pacman-init.service choose-mirror.service docker.service
+systemctl enable pacman-init.service choose-mirror.service
 systemctl set-default multi-user.target
+
+. /root/booty.conf
+
+if [ -n "${BOOTY_ENABLE_SSH:-}" ]; then
+    systemctl enable sshd.service
+    echo '[+] enabled sshd'
+fi
+
+if [ -n "${BOOTY_ENABLE_DOCKER:-}" ]; then
+    systemctl enable docker.service
+    echo '[+] enabled docker'
+fi
