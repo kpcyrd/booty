@@ -9,4 +9,4 @@
 	url = https://aur.archlinux.org/memry.git
 [submodule "packages/rshijack"]
 	path = packages/rshijack
-	url = ssh://aur@aur.archlinux.org/rshijack.git
+	url = https://aur.archlinux.org/rshijack.git
