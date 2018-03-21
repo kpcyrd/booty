@@ -10,3 +10,6 @@
 [submodule "packages/rshijack"]
 	path = packages/rshijack
 	url = https://aur.archlinux.org/rshijack.git
+[submodule "packages/badtouch"]
+	path = packages/badtouch
+	url = https://aur.archlinux.org/badtouch.git
