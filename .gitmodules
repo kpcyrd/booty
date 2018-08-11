@@ -1,15 +1,6 @@
-[submodule "packages/sniffglue"]
-	path = packages/sniffglue
-	url = https://aur.archlinux.org/sniffglue.git
 [submodule "packages/tr1pd"]
 	path = packages/tr1pd
 	url = https://aur.archlinux.org/tr1pd.git
 [submodule "packages/memry"]
 	path = packages/memry
 	url = https://aur.archlinux.org/memry.git
-[submodule "packages/rshijack"]
-	path = packages/rshijack
-	url = https://aur.archlinux.org/rshijack.git
-[submodule "packages/badtouch"]
-	path = packages/badtouch
-	url = https://aur.archlinux.org/badtouch.git
