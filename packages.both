@@ -102,7 +102,6 @@ sdparm
 sg3_utils
 signify
 smartmontools
-speedtouch
 strace
 sudo
 tcpdump
@@ -121,4 +120,3 @@ wpa_actiond
 wvdial
 xl2tpd
 #yrd
-zd1211-firmware
