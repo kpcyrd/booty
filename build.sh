@@ -74,11 +74,11 @@ make_pacman_conf() {
     _cache_dirs=($(pacman -v 2>&1 | grep '^Cache Dirs:' | sed 's/Cache Dirs:\s*//g'))
     sed -r "s|^#?\\s*CacheDir.+|CacheDir = $(echo -n ${_cache_dirs[@]})|g" ${script_path}/pacman.conf > ${work_dir}/pacman.conf
 
-    cat >> ${work_dir}/pacman.conf <<EOF
-[booty]
-SigLevel = Optional TrustAll
-Server = file://${script_path}/repo
-EOF
+#    cat >> ${work_dir}/pacman.conf <<EOF
+#[booty]
+#SigLevel = Optional TrustAll
+#Server = file://${script_path}/repo
+#EOF
 }
 
 # Base installation, plus needed packages (airootfs)
