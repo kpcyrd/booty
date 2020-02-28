@@ -1,0 +1,17 @@
+# Maintainer: kpcyrd <kpcyrd[at]archlinux[dot]org>
+
+pkgname=booty-tools
+pkgver=0.1.0
+pkgrel=1
+pkgdesc='booty tools'
+url='https://github.com/kpcyrd/booty'
+arch=('x86_64')
+license=('GPL3')
+source=('booty')
+sha256sums=('SKIP')
+
+package() {
+  install -Dm 755 booty -t "${pkgdir}/usr/bin"
+}
+
+# vim: ts=2 sw=2 et:

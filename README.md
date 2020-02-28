@@ -9,8 +9,8 @@ Minimal forensic/exfiltration/evil-maid/rescue live boot system.
 
 ## Build
 
-    #git submodule init
-    #./build.sh -p
+    git submodule init
+    ./build.sh -p
     sudo ./build.sh -v
     ls -lah out/
 
@@ -35,6 +35,8 @@ merge upstream changes with your personal config.
 ## Build in docker
 
     docker build -t booty-builder .
+    docker run --privileged --rm -v `pwd`:/booty booty-builder sh -c 'mkdir repo && chown nobody. repo'
+    docker run --privileged --rm -v `pwd`:/booty booty-builder sudo -u nobody ./build.sh -p
     docker run --privileged --rm -e 'ARCH_MIRROR=http://ftp.halifax.rwth-aachen.de/archlinux' -v `pwd`:/booty -v /dev:/dev booty-builder ./build.sh -v
 
 ## License

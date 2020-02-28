@@ -22,6 +22,7 @@ _usage ()
     echo "usage ${0} [options]"
     echo
     echo " General options:"
+    echo "    -p                 Build local repo"
     echo "    -N <iso_name>      Set an iso filename (prefix)"
     echo "                        Default: ${iso_name}"
     echo "    -V <iso_version>   Set an iso version (in filename)"
@@ -79,11 +80,11 @@ make_pacman_conf() {
     _cache_dirs=($(pacman -v 2>&1 | grep '^Cache Dirs:' | sed 's/Cache Dirs:\s*//g'))
     sed -r "s|^#?\\s*CacheDir.+|CacheDir = $(echo -n ${_cache_dirs[@]})|g" ${script_path}/pacman.conf > ${work_dir}/pacman.conf
 
-#    cat >> ${work_dir}/pacman.conf <<EOF
-#[booty]
-#SigLevel = Optional TrustAll
-#Server = file://${script_path}/repo
-#EOF
+    cat >> ${work_dir}/pacman.conf <<EOF
+[booty]
+SigLevel = Optional TrustAll
+Server = file://${script_path}/repo
+EOF
 }
 
 # Base installation, plus needed packages (airootfs)
@@ -263,13 +264,9 @@ make_iso() {
     mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "${iso_name}-${iso_version}-x86_64.iso"
 }
 
-if [[ ${EUID} -ne 0 ]]; then
-    echo "This script must be run as root."
-    _usage 1
-fi
-
-while getopts 'N:V:L:P:A:D:w:o:g:vh' arg; do
+while getopts 'pN:V:L:P:A:D:w:o:g:vh' arg; do
     case "${arg}" in
+        p) build_repo=1 ;;
         N) iso_name="${OPTARG}" ;;
         V) iso_version="${OPTARG}" ;;
         L) iso_label="${OPTARG}" ;;
@@ -287,6 +284,16 @@ while getopts 'N:V:L:P:A:D:w:o:g:vh' arg; do
            ;;
     esac
 done
+
+if [ -n "${build_repo+x}" ]; then
+    make_repo
+    exit 0
+fi
+
+if [[ ${EUID} -ne 0 ]]; then
+    echo "This script must be run as root."
+    _usage 1
+fi
 
 mkdir -p ${work_dir}
 
