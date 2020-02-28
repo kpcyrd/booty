@@ -9,8 +9,8 @@ Minimal forensic/exfiltration/evil-maid/rescue live boot system.
 
 ## Build
 
-    git submodule init
-    ./build.sh -p
+    #git submodule init
+    #./build.sh -p
     sudo ./build.sh -v
     ls -lah out/
 
@@ -31,6 +31,11 @@ setup directly at boot? We've got you covered.
 
 It is recommended to fork the repo and commit your changes, so you can easily
 merge upstream changes with your personal config.
+
+## Build in docker
+
+    docker build -t booty-builder .
+    docker run --privileged --rm -e 'ARCH_MIRROR=http://ftp.halifax.rwth-aachen.de/archlinux' -v `pwd`:/booty -v /dev:/dev booty-builder ./build.sh -v
 
 ## License
 

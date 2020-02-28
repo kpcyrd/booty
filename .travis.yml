@@ -7,14 +7,14 @@ services:
 before_install:
 - sudo ci/setup.sh
 - sudo rm -rf work/
-- docker build -t builder .
+- docker build -t booty-builder .
 
 script:
 # prevent travis from killing the job
 - ci/keepalive.sh &
-- docker run --privileged --rm -v `pwd`:/booty builder sh -c 'mkdir repo && chown nobody. repo'
-#- docker run --privileged --rm -v `pwd`:/booty builder sudo -u nobody ./build.sh -p
+#- docker run --privileged --rm -v `pwd`:/booty booty-builder sh -c 'mkdir repo && chown nobody. repo'
+#- docker run --privileged --rm -v `pwd`:/booty booty-builder sudo -u nobody ./build.sh -p
 # -v /dev:/dev is needed as a workaround on travis
-- docker run --privileged --rm -v `pwd`:/booty -v /dev:/dev builder ./build.sh -v
+- docker run --privileged --rm -v `pwd`:/booty -v /dev:/dev booty-builder ./build.sh -v
 - ls -lah out/
 ...
